@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Playback_Start</key>
+	<string>media_playback_start.png</string>
+	<key>Playback_Pause</key>
+	<string>media_playback_pause.png</string>
+	<key>Playback_Stop</key>
+	<string>media_playback_stop.png</string>
+	<key>Skip_Forward</key>
+	<string>media_skip_forward.png</string>
+	<key>Skip_Backward</key>
+	<string>media_skip_backward.png</string>
+	<key>LoopNone</key>
+	<string>loopNone.png</string>
+	<key>LoopAll</key>
+	<string>loopAll.png</string>
+	<key>LoopSingle</key>
+	<string>one.png</string>
+	<key>Shuffle</key>
+	<string>shuffle.png</string>
+</dict>
+</plist>
