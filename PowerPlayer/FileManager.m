@@ -153,7 +153,10 @@ static FileManager *instance = nil;
             else //windows chinese
             {
                 NSData *dateStr = [aString dataUsingEncoding: NSISOLatin1StringEncoding];
-                NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+                // CAUTION:
+                // Here convert string into a specified encoding.
+                // I don't knonw why. But kCFStringEncodingBig5 does work here...
+                NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingBig5);
                 return [[[NSString alloc] initWithData:dateStr encoding:enc] autorelease];
             }
         }
