@@ -124,6 +124,44 @@ static FileManager *instance = nil;
     return m_arrSongs;
 }
 
+- (BOOL)validateEncode:(NSString*)aStr
+{   
+    NSCharacterSet *chars = [[NSCharacterSet
+                              characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 "] invertedSet];
+    
+    BOOL isValid = (NSNotFound == [aStr rangeOfCharacterFromSet:chars].location);
+    return isValid;
+}
+
+- (NSString *)correctString:(NSString *)aString
+{
+    if (aString)
+    {
+        const char *ptr = [aString cStringUsingEncoding:NSISOLatin1StringEncoding];       
+        
+        if (ptr == 0) //mac chinese
+        {
+            return aString;
+        }
+        else
+        {
+            BOOL isValid = [self validateEncode:aString];
+            if (isValid) //english
+            {
+                return aString;
+            }    
+            else //windows chinese
+            {
+                NSData *dateStr = [aString dataUsingEncoding: NSISOLatin1StringEncoding];
+                NSStringEncoding enc = CFStringConvertEncodingToNSStringEncoding(kCFStringEncodingGB_18030_2000);
+                return [[[NSString alloc] initWithData:dateStr encoding:enc] autorelease];
+            }
+        }
+    }    
+    
+    return nil;
+}
+
 - (void)parseFiles
 {
     [m_arrSongs removeAllObjects];
@@ -160,15 +198,14 @@ static FileManager *instance = nil;
                         NSString *sArtist = [dic objectForKey:[NSString stringWithUTF8String:kAFInfoDictionary_Artist]];
                         if (nil != sArtist && NO == [sArtist isEqualToString:@""])
                         {
-                            newSong.performer = sArtist;
+                            newSong.performer = [self correctString:sArtist];
                         }
                         
                         NSString *sTitle = [dic objectForKey:[NSString stringWithUTF8String:kAFInfoDictionary_Title]];
                         if (nil != sTitle && NO == [sTitle isEqualToString:@""])
                         {
-                            newSong.title = sTitle;
+                            newSong.title = [self correctString:sTitle];
                         }
-                        
                         
                         NSString *sDuration = [dic objectForKey:[NSString stringWithUTF8String:kAFInfoDictionary_ApproximateDurationInSeconds]];
                         if (nil != sDuration && NO == [sDuration isEqualToString:@""])

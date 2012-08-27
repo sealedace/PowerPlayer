@@ -35,13 +35,21 @@
         
         // Title
         m_labelTitle = [[DynamicLabel alloc] init];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_5_1
         [m_labelTitle.label setTextAlignment:NSTextAlignmentCenter];
+#else
+        [m_labelTitle.label setTextAlignment:UITextAlignmentCenter];
+#endif
         [m_labelTitle.label setTextColor:[UIColor colorWithWhite:0.8 alpha:1]];
         [self addSubview:m_labelTitle];
         
         // Performer
         m_labelPerformer = [[DynamicLabel alloc] init];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_5_1
         [m_labelPerformer.label setTextAlignment:NSTextAlignmentCenter];
+#else
+        [m_labelPerformer.label setTextAlignment:UITextAlignmentCenter];
+#endif
         [m_labelPerformer.label setTextColor:[UIColor colorWithWhite:0.8 alpha:1]];
         [m_labelPerformer.label setFont:[UIFont systemFontOfSize:12]];
         [self addSubview:m_labelPerformer];

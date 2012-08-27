@@ -25,7 +25,7 @@ static void BufferCallback(void *inUserData, AudioQueueRef inAQ,
 - (void) audioQueueOutputWithQueue:(AudioQueueRef)audioQueue
                        queueBuffer:(AudioQueueBufferRef)audioQueueBuffer;
 - (UInt32)readPacketsIntoBuffer:(AudioQueueBufferRef)buffer;
-#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_5_0
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_5_1
 - (void)didReceivedInterruptNotification:(NSNotification *)notification;
 #endif
 @end
@@ -53,7 +53,7 @@ static void BufferCallback(void *inUserData, AudioQueueRef inAQ,
         m_meterTable = [[MeterTable alloc] init];
         m_song = [song retain];
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_5_0
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_5_1
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceivedInterruptNotification:) name:AVAudioSessionInterruptionNotification object:nil];
 #endif
     }
@@ -415,7 +415,7 @@ static void BufferCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
 
     // 12. Enable play in background
     AVAudioSession* audioSession = [AVAudioSession sharedInstance];
-#if __IPHONE_OS_VERSION_MAX_ALLOWED <= __IPHONE_5_0
+#if __IPHONE_OS_VERSION_MAX_ALLOWED <= __IPHONE_5_1
     [audioSession setDelegate:self];
 #endif
     [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
@@ -464,7 +464,7 @@ static void BufferCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
 }
 
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_5_0
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_5_1
 - (void)didReceivedInterruptNotification:(NSNotification *)notification
 {
     NSDictionary *userInfo = [notification userInfo];

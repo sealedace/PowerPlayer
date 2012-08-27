@@ -62,7 +62,11 @@ MAX([UIApplication sharedApplication].statusBarFrame.size.width, [UIApplication 
         
         m_labelTitle = [[DynamicLabel alloc] initWithFrame:frame1];
         [m_labelTitle.label setTextColor:[UIColor whiteColor]];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_5_1
         [m_labelTitle.label setTextAlignment:NSTextAlignmentCenter];
+#else
+        [m_labelTitle.label setTextAlignment:UITextAlignmentCenter];
+#endif
         m_labelTitle.alpha = 1.0f;
         [self addSubview:m_labelTitle];
         

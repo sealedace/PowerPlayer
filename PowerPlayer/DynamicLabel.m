@@ -38,8 +38,11 @@
         m_label.font = [UIFont systemFontOfSize:DefaultFontSize];
         m_label.text = @"";
         m_label.textColor = [UIColor blackColor];
-
-        m_label.textAlignment = NSTextAlignmentLeft;
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_5_1
+        [m_label setTextAlignment:NSTextAlignmentLeft];
+#else
+        [m_label setTextAlignment:UITextAlignmentLeft];
+#endif  
     }
     return self;
 }
@@ -65,8 +68,12 @@
         m_label.font = [UIFont systemFontOfSize:DefaultFontSize];
         m_label.text = @"";
         m_label.textColor = [UIColor blackColor];
-        m_label.textAlignment = NSTextAlignmentLeft;
         
+#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_5_1
+        [m_label setTextAlignment:NSTextAlignmentLeft];
+#else
+        [m_label setTextAlignment:UITextAlignmentLeft];
+#endif        
     }
     return self;
 }
