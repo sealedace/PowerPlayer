@@ -139,18 +139,18 @@ static FileManager *instance = nil;
     {
         const char *ptr = [aString cStringUsingEncoding:NSISOLatin1StringEncoding];       
         
-        if (ptr == 0) //mac chinese
+        if (ptr == 0) //Mac Chinese
         {
             return aString;
         }
         else
         {
             BOOL isValid = [self validateEncode:aString];
-            if (isValid) //english
+            if (isValid) //English
             {
                 return aString;
             }    
-            else //windows chinese
+            else //Windows Chinese
             {
                 NSData *dateStr = [aString dataUsingEncoding: NSISOLatin1StringEncoding];
                 // CAUTION:
