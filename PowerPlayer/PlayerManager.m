@@ -38,7 +38,19 @@ static PlayerManager *instance = nil;
         m_playMode = PlayMode_Shuffle;
         m_currentIndex = 0;
         m_bIsLoop = YES;
-        m_arrayOrder = nil;
+        // 
+        NSInteger iTotal = [[[FileManager sharedInstance] allSongs] count];
+        m_arrayOrder = [[NSMutableArray alloc] initWithCapacity:iTotal];
+        for (NSUInteger i=0; i<iTotal; i++)
+        {
+            [m_arrayOrder addObject:[NSNumber numberWithInt:i]];
+        }
+        
+        m_arrayDisplayOrder = [[NSMutableArray alloc] initWithCapacity:iTotal];
+        for (NSUInteger i=0; i<iTotal; i++)
+        {
+            [m_arrayDisplayOrder addObject:[NSNumber numberWithInt:i]];
+        }
         [self reorder];
     }
     return self;
@@ -47,13 +59,14 @@ static PlayerManager *instance = nil;
 - (void)dealloc
 {
     SAFE_RELEASE(m_player);
+    SAFE_RELEASE(m_arrayOrder);
+    SAFE_RELEASE(m_arrayDisplayOrder);
     [super dealloc];
 }
 
 #pragma -
 - (void)playAudioAtFileIndex:(NSInteger)index
 {
-    m_currentIndex = index;
     Song *songToPlay = [self songAtIndex:index];
     Player *player = [self currentPlayer];
     if (nil == player)
@@ -76,10 +89,11 @@ static PlayerManager *instance = nil;
 - (void)playAudio:(Song *)song
 {
     [self stop];
-
+    
     if (nil == m_player)
     {
         m_player = [[Player alloc] initWithSong:song];
+        m_currentIndex = song.pIndex;
         [[NSNotificationCenter defaultCenter] postNotificationName:PPNotification_SongsListDidSelect
                                                             object:nil];
         m_player.delegate = self;
@@ -111,6 +125,11 @@ static PlayerManager *instance = nil;
     return [[[FileManager sharedInstance] allSongs] objectAtIndex:[[m_arrayOrder objectAtIndex:index] integerValue]];
 }
 
+- (Song *)songAtListIndex:(NSUInteger)index
+{
+    return [[[FileManager sharedInstance] allSongs] objectAtIndex:[[m_arrayDisplayOrder objectAtIndex:index] integerValue]];
+}
+
 - (void)shuffle
 {
     for (NSInteger i=([m_arrayOrder count]-1); i>=0; i--)
@@ -122,20 +141,12 @@ static PlayerManager *instance = nil;
     for (NSUInteger i=0;i<[m_arrayOrder count]; i++)
     {
         Song *oneSong = [self songAtIndex:i];
-        oneSong.index = i;
+        oneSong.pIndex = i;
     }
 }
 
 - (void)reorder
 {
-    SAFE_RELEASE(m_arrayOrder);
-    NSInteger iTotal = [[[FileManager sharedInstance] allSongs] count];
-    m_arrayOrder = [[NSMutableArray alloc] initWithCapacity:iTotal];
-    for (NSUInteger i=0; i<iTotal; i++)
-    {
-        [m_arrayOrder addObject:[NSNumber numberWithInt:i]];
-    }
-    
     if (m_playMode == PlayMode_Shuffle)
     {
         // do shuffle

@@ -13,7 +13,7 @@
 #import "PublicDefinitions.h"
 #import "Player.h"
 #import "PlayerManager.h"
-#import "ToolBoard.h"
+//#import "ToolBoard.h"
 
 #define HeadHeight 60.0f
 
@@ -114,8 +114,8 @@
               forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:m_songDetailBar];
     
-    m_toolBoard = [[ToolBoard alloc] initWithFrame:frameSongDetailBar];
-    [self.view addSubview:m_toolBoard];
+//    m_toolBoard = [[ToolBoard alloc] initWithFrame:frameSongDetailBar];
+//    [self.view addSubview:m_toolBoard];
     
     // Body
     CGRect frameSongsListViewController = CGRectMake(0,
@@ -158,7 +158,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [m_songDetailBar release];
     [m_ringEmitter release];
-    [m_toolBoard release];
+//    [m_toolBoard release];
     [super dealloc];
 }
 

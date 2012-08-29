@@ -229,6 +229,7 @@ static void writeWavHeader(AVCodecContext *pCodecCtx,AVFormatContext *pFormatCtx
                 return;
             }
         
+        LOGS(@"Open codec sucessfully.");
         // 8. prepare input file & output file
         FILE *infile, *outfile;
         
@@ -296,14 +297,17 @@ static void writeWavHeader(AVCodecContext *pCodecCtx,AVFormatContext *pFormatCtx
         int64_t endPTS = 0;
         
         int64_t beginSeconds = 60*m_audioObject.beginMinute+m_audioObject.beginSecond;
-         if (beginSeconds > 0)
+        
+        if (beginSeconds > 0)
         {
             int64_t endSeconds = 60*m_audioObject.endMinute+m_audioObject.endSecond;
             m_totalTime = endSeconds - beginSeconds;
             
             beginPTS = beginSeconds * inputStream->time_base.den / inputStream->time_base.num;
             endPTS = endSeconds * inputStream->time_base.den / inputStream->time_base.num;
-            av_seek_frame(pFormatCtx, audioStream, beginPTS, AVSEEK_FLAG_FRAME);
+            LOGS(@"Start to seek frame...");
+            av_seek_frame(pFormatCtx, audioStream, beginPTS, AVSEEK_FLAG_ANY);
+            LOGS(@"Seeking frame ends.");
         }
         
         [[NSNotificationCenter defaultCenter] postNotificationName:PPNotification_WillBeginDecoding

@@ -284,7 +284,6 @@ static void BufferCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
             if (m_queueCompleteCount%(NUM_BUFFERS/2)==0)
             {
                 // Re-open file to keep moving...
-                NSLog(@"Re-open file");
                 AudioFileClose(m_audioFileID);
                 AudioFileOpenURL((CFURLRef)[NSURL URLWithString:[FileManager outputFile]],
                                  kAudioFileReadPermission, 0, &m_audioFileID);

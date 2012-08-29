@@ -303,7 +303,7 @@ static FileManager *instance = nil;
     for (NSUInteger i=0; i<[m_arrSongs count]; i++)
     {
         Song *oneSong = [m_arrSongs objectAtIndex:i];
-        oneSong.index = i;
+        oneSong.pIndex = oneSong.dIndex = i;
     }
 }
 

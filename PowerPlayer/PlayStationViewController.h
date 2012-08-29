@@ -14,7 +14,7 @@
 @interface PlayStationViewController : UIViewController
 {
     SongDetailBar *m_songDetailBar;
-    ToolBoard *m_toolBoard;
+//    ToolBoard *m_toolBoard;
     CFRunLoopRef m_subRunLoop;
 }
 

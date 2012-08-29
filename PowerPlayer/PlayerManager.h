@@ -25,12 +25,15 @@ typedef enum _PlayMode
     BOOL m_bIsLoop;
     TPlayMode m_playMode;
     
-    NSMutableArray *m_arrayOrder;
+    NSMutableArray *m_arrayOrder; // order for playing control
+    NSMutableArray *m_arrayDisplayOrder; // order for display the song list
+    
     NSInteger m_currentIndex;
 }
 
 + (PlayerManager *)sharedInstance;
 - (Song *)songAtIndex:(NSUInteger)index;
+- (Song *)songAtListIndex:(NSUInteger)index;
 - (void)setPlayMode:(TPlayMode)mode;
 - (void)setLoop:(BOOL)bLoop;
 - (void)playAudio:(Song *)song;

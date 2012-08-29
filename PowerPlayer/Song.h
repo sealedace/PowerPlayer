@@ -40,5 +40,7 @@
 @property (nonatomic, assign) uint8_t endSecond;
 @property (nonatomic, assign) uint8_t endFrame;
 
-@property (nonatomic, assign) NSUInteger index;
+@property (nonatomic, assign) NSUInteger pIndex;// index for playing
+@property (nonatomic, assign) NSUInteger dIndex;// index for display
+
 @end

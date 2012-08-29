@@ -23,7 +23,8 @@
 @synthesize endSecond=m_endSecond;
 @synthesize endFrame=m_endFrame;
 
-@synthesize index=m_index;
+@synthesize pIndex=_pIndex;
+@synthesize dIndex=_dIndex;
 
 - (id)init
 {
@@ -39,7 +40,7 @@
         m_endSecond = 0;
         m_endFrame = 0;
         
-        m_index = 0;
+        _pIndex = _dIndex = 0;
     }
     return self;
 }

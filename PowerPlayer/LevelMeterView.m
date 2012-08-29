@@ -106,11 +106,15 @@
         if (NULL == m_subRunLoop)
         {
             m_subRunLoop = CFRunLoopGetCurrent();
-            [NSTimer scheduledTimerWithTimeInterval:(1.0/30)
-                                             target:self
-                                           selector:@selector(updateLevel) 
-                                           userInfo:nil
-                                            repeats:YES];
+            CADisplayLink *timer = [CADisplayLink displayLinkWithTarget:self
+                                                               selector:@selector(updateLevel)];
+            [timer addToRunLoop:[NSRunLoop currentRunLoop]
+                        forMode:NSRunLoopCommonModes];
+//            [NSTimer scheduledTimerWithTimeInterval:(1.0/30)
+//                                             target:self
+//                                           selector:@selector(updateLevel) 
+//                                           userInfo:nil
+//                                            repeats:YES];
             CFRunLoopRun();
         }
     }

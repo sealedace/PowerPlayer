@@ -95,11 +95,15 @@
         if (NULL == m_subRunLoop)
         {
             m_subRunLoop = CFRunLoopGetCurrent();
-            [NSTimer scheduledTimerWithTimeInterval:(m_TMode==PlayerWorkStatusPlaySong?(1.0/4):(1.0/30))
-                                             target:self
-                                           selector:@selector(updateProgress)
-                                           userInfo:nil
-                                            repeats:YES];
+            CADisplayLink *timer = [CADisplayLink displayLinkWithTarget:self
+                                                               selector:@selector(updateProgress)];
+            [timer addToRunLoop:[NSRunLoop currentRunLoop]
+                        forMode:NSRunLoopCommonModes];
+//            [NSTimer scheduledTimerWithTimeInterval:(m_TMode==PlayerWorkStatusPlaySong?(1.0/4):(1.0/30))
+//                                             target:self
+//                                           selector:@selector(updateProgress)
+//                                           userInfo:nil
+//                                            repeats:YES];
             CFRunLoopRun();
         }
     }

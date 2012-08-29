@@ -60,6 +60,7 @@ void logMemoryInfo()
     m_fileManager = [FileManager sharedInstance];
     [FileManager prepareBasicDirectories];
     
+    // PlayerManger must be initialized follow FileManager's initialization
     m_playerManager = [PlayerManager sharedInstance];
     
     [NSThread sleepForTimeInterval:1];

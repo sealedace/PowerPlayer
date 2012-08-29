@@ -128,7 +128,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
 
-    Song *aSong = [[PlayerManager sharedInstance] songAtIndex:indexPath.row];
+    Song *aSong = [[PlayerManager sharedInstance] songAtListIndex:indexPath.row];
     [cell.titleLabel setText:aSong.title];
     [cell.performerLabel setText:aSong.performer];
     cell.song = aSong;
@@ -190,7 +190,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [[PlayerManager sharedInstance] playAudioAtFileIndex:indexPath.row];
+    Song *aSong = [[PlayerManager sharedInstance] songAtListIndex:indexPath.row];
+    [[PlayerManager sharedInstance] playAudio:aSong];
     SongsListCell *cell = (SongsListCell*)[tableView cellForRowAtIndexPath:indexPath];
     [cell setPlaying:YES];
 }
@@ -201,7 +202,7 @@
     Song *oneSong = [[[PlayerManager sharedInstance] currentPlayer] currentSong];
     if (nil != oneSong)
     {
-        [m_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:oneSong.index inSection:0]
+        [m_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:oneSong.dIndex inSection:0]
                            atScrollPosition:UITableViewScrollPositionMiddle
                                    animated:YES];
     }
