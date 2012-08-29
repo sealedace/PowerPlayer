@@ -283,11 +283,16 @@ static FileManager *instance = nil;
                 // Remove the entire file
                 Song *song = [arraySongs lastObject];
                 NSString *sFileToRemoveFromSongs = song.file;
+                NSLog(@"File to remove : %@", sFileToRemoveFromSongs);
+                NSData *dataFileToRemove = [sFileToRemoveFromSongs dataUsingEncoding:NSASCIIStringEncoding];
                 for (NSUInteger i=0; i<[m_arrSongs count]; i++)
                 {
                     Song *oneSong = [m_arrSongs objectAtIndex:i];
-                    if ([oneSong.file isEqualToString:sFileToRemoveFromSongs])
+                    NSData *dataFileName = [oneSong.file dataUsingEncoding:NSASCIIStringEncoding];
+                    if ([oneSong.file isEqualToString:sFileToRemoveFromSongs]
+                        || [dataFileName isEqualToData:dataFileToRemove])
                     {
+                        NSLog(@"Removed file : %@", sFileToRemoveFromSongs);
                         [m_arrSongs removeObjectAtIndex:i];
                         break;
                     }

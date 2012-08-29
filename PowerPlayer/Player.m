@@ -258,20 +258,20 @@ static void BufferCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
         status = AudioQueueEnqueueBuffer(audioQueue, audioQueueBuffer, (m_packetDescs?numPackets:0), m_packetDescs);
         m_packetIndex += numPackets;
         
-        int numFrequencies=16384;
-        int kNumFFTWindows=10;
-        
-        OouraFFT *myFFT = [[OouraFFT alloc] initForSignalsOfLength:numFrequencies*2 
-                                                     andNumWindows:kNumFFTWindows];
-        for(long i=0; i<myFFT.dataLength; i++)
-        {
-            SInt16 *audioData;
-            audioData = audioQueueBuffer->mAudioData;
-            myFFT.inputData[i] = (double)audioData[i];
-        }
-
-        [myFFT calculateWelchPeriodogramWithNewSignalSegment];
-        NSLog(@"data length is %d", myFFT.dataLength);
+//        int numFrequencies=16384;
+//        int kNumFFTWindows=10;
+//        
+//        OouraFFT *myFFT = [[OouraFFT alloc] initForSignalsOfLength:numFrequencies*2 
+//                                                     andNumWindows:kNumFFTWindows];
+//        for(long i=0; i<myFFT.dataLength; i++)
+//        {
+//            SInt16 *audioData;
+//            audioData = audioQueueBuffer->mAudioData;
+//            myFFT.inputData[i] = (double)audioData[i];
+//        }
+//
+//        [myFFT calculateWelchPeriodogramWithNewSignalSegment];
+//        NSLog(@"data length is %d", myFFT.dataLength);
         
 //        for (int i=0;i<=myFFT.dataLength;i++) 
 //        {

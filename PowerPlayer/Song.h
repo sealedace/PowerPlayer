@@ -16,13 +16,13 @@
     NSString *performer;
     NSString *title;
     
-    uint8_t beginMinute;
-    uint8_t beginSecond;
-    uint8_t beginFrame;
+    uint32_t beginMinute;
+    uint32_t beginSecond;
+    uint32_t beginFrame;
     
-    uint8_t endMinute;
-    uint8_t endSecond;
-    uint8_t endFrame;
+    uint32_t endMinute;
+    uint32_t endSecond;
+    uint32_t endFrame;
 }
 
 
@@ -32,13 +32,13 @@
 @property (nonatomic, retain) NSString *performer;
 @property (nonatomic, retain) NSString *title;
 
-@property (nonatomic, assign) uint8_t beginMinute;
-@property (nonatomic, assign) uint8_t beginSecond;
-@property (nonatomic, assign) uint8_t beginFrame;
+@property (nonatomic, assign) uint32_t beginMinute;
+@property (nonatomic, assign) uint32_t beginSecond;
+@property (nonatomic, assign) uint32_t beginFrame;
 
-@property (nonatomic, assign) uint8_t endMinute;
-@property (nonatomic, assign) uint8_t endSecond;
-@property (nonatomic, assign) uint8_t endFrame;
+@property (nonatomic, assign) uint32_t endMinute;
+@property (nonatomic, assign) uint32_t endSecond;
+@property (nonatomic, assign) uint32_t endFrame;
 
 @property (nonatomic, assign) NSUInteger pIndex;// index for playing
 @property (nonatomic, assign) NSUInteger dIndex;// index for display

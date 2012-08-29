@@ -297,12 +297,11 @@ static void writeWavHeader(AVCodecContext *pCodecCtx,AVFormatContext *pFormatCtx
         int64_t endPTS = 0;
         
         int64_t beginSeconds = 60*m_audioObject.beginMinute+m_audioObject.beginSecond;
+        int64_t endSeconds = 60*m_audioObject.endMinute+m_audioObject.endSecond;
+        m_totalTime = endSeconds - beginSeconds;
         
         if (beginSeconds > 0)
         {
-            int64_t endSeconds = 60*m_audioObject.endMinute+m_audioObject.endSecond;
-            m_totalTime = endSeconds - beginSeconds;
-            
             beginPTS = beginSeconds * inputStream->time_base.den / inputStream->time_base.num;
             endPTS = endSeconds * inputStream->time_base.den / inputStream->time_base.num;
             LOGS(@"Start to seek frame...");
