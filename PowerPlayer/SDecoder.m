@@ -300,10 +300,10 @@ static void writeWavHeader(AVCodecContext *pCodecCtx,AVFormatContext *pFormatCtx
         int64_t endSeconds = 60*m_audioObject.endMinute+m_audioObject.endSecond;
         m_totalTime = endSeconds - beginSeconds;
         
+        endPTS = endSeconds * inputStream->time_base.den / inputStream->time_base.num;
         if (beginSeconds > 0)
         {
             beginPTS = beginSeconds * inputStream->time_base.den / inputStream->time_base.num;
-            endPTS = endSeconds * inputStream->time_base.den / inputStream->time_base.num;
             LOGS(@"Start to seek frame...");
             av_seek_frame(pFormatCtx, audioStream, beginPTS, AVSEEK_FLAG_ANY);
             LOGS(@"Seeking frame ends.");
