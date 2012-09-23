@@ -296,7 +296,7 @@ static void BufferCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBuffe
         AudioQueueFreeBuffer(audioQueue, audioQueueBuffer);
         if (0 == m_queueCountDown)
         {
-            NSLog(@"Audio play ends.");
+            LOGS(@"Audio play ends.");
             AudioFileClose(m_audioFileID);
             m_playerStatus = Player_Stopped;
             if (nil != m_delegte && YES == [m_delegte respondsToSelector:@selector(playerDidPlayFinished:)])
